@@ -28,7 +28,10 @@ const firestore = firebase.firestore();
 const analytics = firebase.analytics();
 
 
+
 function App() {
+
+ 
 
 
   
@@ -61,6 +64,7 @@ function SignIn() {
   return (
     <>
       <button className="sign-in custom-button" onClick={signInWithGoogle}>Sign in with Google</button>
+      <h4 className='creator-token-encrypt'>Provided by <a href='https://rmzn.netlify.app' target='_blank'>Ramazan Azimli</a></h4>
     </>
   )
 
@@ -88,6 +92,9 @@ function ChatRoom() {
 
     const { uid, photoURL } = auth.currentUser;
 
+
+  
+
     await messagesRef.add({
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -112,10 +119,15 @@ function ChatRoom() {
 
       <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="write message" />
 
-      <button type="submit" disabled={!formValue} id='template-action'><IoSendSharp/></button>
+      <button type="submit" disabled={!formValue} id='template-action' onClick={handleSendMessage}><IoSendSharp/></button>
 
     </form>
   </>)
+    function handleSendMessage() {
+      const sendMessageSound = document.getElementById("audio-effect");
+      sendMessageSound.play();
+    }
+  
 }
 
 

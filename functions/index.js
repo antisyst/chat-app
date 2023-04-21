@@ -1,11 +1,10 @@
-const functions = require('firebase-functions');
-const Filter = require('bad-words');
-const admin = require('firebase-admin');
-admin.initializeApp();
+import { firestore } from 'firebase-functions';
+import { initializeApp, firestore as _firestore } from 'firebase-admin';
+initializeApp();
 
-const db = admin.firestore();
+const db = _firestore();
 
-exports.detectEvilUsers = functions.firestore
+export const detectEvilUsers = firestore
        .document('messages/{msgId}')
        .onCreate(async (doc, ctx) => {
 
